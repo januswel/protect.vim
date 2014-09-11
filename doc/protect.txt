@@ -1,0 +1,85 @@
+*protect.txt*	Plugin to protect files
+                                                Last change: 2014 Sep 12.
+
+SYNOPSIS						*protect-synopsis*
+>
+	" in your .vimrc
+	let g:protect_readonly_paths = "~/importants/*"
+	let g:protect_nomodifiable_paths = '~/veryimportants/**'
+
+DESCRIPTION						*protect-description*
+
+Plugin to enable 'readonly' or disable 'modifiable' based on the file path
+automatically, when you open files.
+
+DEPENDENCIES						*protect-dependencies*
+
+{only available when your VIM has the |+autoload| feature}
+
+PROVIDES						*protect-provides*
+
+Commands:
+:ProtectFiles
+	Activate your configuration with global variables.  See
+	|protect-settings|.
+
+Augroups:
+protect
+	All of the autocmds provided by this plugin are located in "protect".
+	To disable in a certain instance of VIM, hit the following command: >
+
+		:autocmd! protect
+
+SETTINGS						*protect-settings*
+
+Variables:
+g:protect_readonly_paths
+	Paths to execute ":setlocal readonly". A |String|, a |List| or a
+	|Dictionary| can be specified.
+	With a String, use "," to set more than one value: >
+
+		let g:protect_readonly_paths = '$VIM/**, ~/repos/tags/**'
+<
+	Use of a List with |line-continuation| is better for readability: >
+
+		let g:protect_readonly_paths = [
+		                \    '$VIM/**',
+		                \    '/home/mymaster/opened/**',
+		                \ ]
+<
+	With a Dictionary, same as a List but keys are ignored, so it's handy
+	to give a comprehensive lable: >
+
+		let g:protec_readonly_paths = {
+				\   'VIM distribution': '$VIM/**',
+		                \   'Ruby library':     'C:/Ruby/lib/**',
+				\ }
+<
+	Note that when this plugin is sourced and you execute :ProtectFiles,
+	the configurations become effective. So restart VIM after defining the
+	variable in your .vimrc, or hit :ProtectFiles after changing a value
+	of this variable.
+
+g:protect_nomodifiable_paths
+	Same as g:protect_readonly_paths but specified paths are covered with
+	":setlocal nomodifiable".
+
+DISABLES						*protect-disables*
+
+Variables:
+g:loaded_protect
+	When exists, does nothing. Use to disable this plugin.
+
+==============================================================================
+
+Author
+	janus_wel <janus.wel.3@gmail.com>
+Copyright
+	(c) 2014 by janus_wel
+License
+	This material may be distributed only subject to the terms and
+	conditions set forth in the Open Publication License, v1.0 or later
+	(the latest version is presently available at
+	http://www.opencontent.org/openpub/).
+
+vim:tw=78:ts=8:noet:ft=help:norl:
