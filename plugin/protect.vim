@@ -82,10 +82,11 @@ function! s:ProtectFiles()
 
     for [opt, var] in items(s:protect_option_variables)
         try
-            if !exists(var)
-                let var = s:protect_option_variables_default[opt]
+            if exists(var)
+                let paths = s:Convert2String(s:GetValueOfVar(var))
+            else
+                let paths = s:Convert2String(s:protect_option_variables_default[opt])
             endif
-            let paths = s:Convert2String(s:GetValueOfVar(var))
         catch
             continue
         endtry
