@@ -32,6 +32,14 @@ protect
 
 SETTINGS						*protect-settings*
 
+DEFAULT
+
+	Following paths are set readonly and nomodifiable.
+
+		* /var/run/**
+		* $VIM/**
+		* $INCLUDE/**
+
 Variables:
 g:protect_readonly_paths
 	Paths to execute ":setlocal readonly". A |String|, a |List| or a
